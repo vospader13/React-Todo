@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
+import "./components/TodoComponents/Todo.css";
 
 
 const tasks = [];
@@ -17,34 +18,34 @@ class App extends Component {
       tasks
     };
   }
-  // add new item
-  addItem = (e, item) => {
+  // add new todo
+  addTodo = (e, todo) => {
     e.preventDefault();
 
-    const newItem = {
-      name: item,
+    const newTodo = {
+      name: todo,
       id: Date.now(),
       completed: false
     };
 
     this.setState({
-      tasks: [...this.state.tasks, newItem]
+      tasks: [...this.state.tasks, newTodo]
     });
   };
 
-  toggleItem = itemId => {
-    
+  toggleTodo = todoID => {
+    console.log(todoID);
     this.setState({
-      completed: this.state.completed.map(item => {
-        console.log(item);
-        if (itemId === item.id) {
+      tasks: this.state.tasks.map(todo => {
+       
+        if (todoID === todo.id) {
           return {
-            ...item,
-            completed: !item.completed
+            ...todo,
+            completed: !todo.completed
           };
         }
 
-        return item;
+        return todo;
       })
     });
   };
@@ -52,7 +53,7 @@ class App extends Component {
   clearCompleted = e => {
     e.preventDefault();
     this.setState({
-      completed: this.state.completed.filter(item => item.completed === false)
+      tasks: this.state.tasks.filter(todo => !todo.completed)
     });
   };
 
@@ -63,12 +64,12 @@ class App extends Component {
       <div>
         <div className ='Header'>
           <h2>Welcome to your Todo App!</h2>
-          <TodoForm addItem={this.addItem} />
+          <TodoForm addTodo={this.addTodo} />
         </div>
         <TodoList
           tasks={this.state.tasks}
-          toggleItem={this.toggleItem}
-          clearPurchased={this.clearPurchased}
+          toggleTodo={this.toggleTodo}
+          clearCompleted={this.clearCompleted}
         />
       </div>
     );

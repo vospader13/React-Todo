@@ -4,7 +4,7 @@ class TodoForm extends Component {
     constructor(){
         super();
         this.state = {
-            item: ''
+            todo: ''
         };
     }
 
@@ -13,16 +13,18 @@ class TodoForm extends Component {
 
     };
 
-    submitItem = e => {
+    submitTodo = e => {
         e.preventDefault();
-        this.props.addItem(e, this.state.item);
+        
+        this.props.addTodo(e, this.state.todo);
+        this.setState({todo: ""});
     };
 
     render () {
         return (
-            <form onSubmit = {this.submitItem}>
-                <input type="text" name="item" onChange={this.handleChanges} />
-                <button>Add task</button>
+            <form onSubmit = {this.submitTodo}>
+                <input type="text" name="todo" onChange={this.handleChanges} />
+                <button>Add Todo</button>
             </form>
         );
     }

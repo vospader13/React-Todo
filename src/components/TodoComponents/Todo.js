@@ -5,12 +5,15 @@ const Todo = props => {
 
   return (
     <div
-        
-        onClick={() => props.toggleItem(props.item.id)}
+        className={`todo${props.todo.completed ? " completed" : ""}`}
+        onClick={() => props.toggleTodo(props.todo.id)}
     >
-      <p>{props.item.name}</p>
+      <p>{props.todo.name}</p>
     </div>
   );
+
 };
+
+
 
 export default Todo;
